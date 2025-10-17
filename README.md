@@ -19,9 +19,11 @@
 
 #### Unofficial
 - [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/)
-> https://github.com/ryan4yin/nixos-and-flakes-book
+https://github.com/ryan4yin/nixos-and-flakes-book
 
 - [MyNixOS](https://mynixos.com/)
+
+- [Lazamar](https://lazamar.co.uk/nix-versions/) for pkg versions
 
 ## nix-darwin
 

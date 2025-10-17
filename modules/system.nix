@@ -1,9 +1,10 @@
-{ self, pkgs, ... }:
+{ self, pkgs, username, ... }:
 #----| macOS System configuration
 # All the configuration options are documented here:
 # https://nix-darwin.github.io/nix-darwin/manual/index.html#sec-options
 {
     system = {
+        primaryUser = username;
         # Used for backwards compatibility, please read the changelog before changing.
         # > darwin-rebuild changelog
         stateVersion = 6;
