@@ -17,6 +17,12 @@
 - [Nix Reference Manual](https://nix.dev/reference/nix-manual.html)
 - [Nix 2.32 Manual](https://nix.dev/manual/nix/2.32/nix-2.32.html)
 
+#### Unofficial
+- [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/)
+> https://github.com/ryan4yin/nixos-and-flakes-book
+
+- [MyNixOS](https://mynixos.com/)
+
 ## nix-darwin
 
 - [nix-darwin Repository](https://github.com/nix-darwin/nix-darwin)
