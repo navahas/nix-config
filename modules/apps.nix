@@ -47,6 +47,7 @@ in {
         nvim0104
         vim
         helix
+        ghostty-bin
 
         # Shell & CLI Utilities
         # bash           # nonInteractive
