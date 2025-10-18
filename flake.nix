@@ -28,12 +28,6 @@
             # hostname = "";
             option = "setup";
 
-            cleanSource = builtins.filterSource
-                (path: type:
-                    let base = baseNameOf path;
-                    in ! (base == ".git" || base == "node_modules" || base == ".direnv"))
-                ./.;
-
             specialArgs =
                 inputs
                 // {
