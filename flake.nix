@@ -7,9 +7,10 @@
             url = "github:LnL7/nix-darwin";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     };
 
-    outputs = inputs@{ self, nixpkgs, darwin, ... }:
+    outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, ... }:
         let
             username = "usuario00";
             system = "aarch64-darwin";

@@ -1,4 +1,4 @@
-{ pkgs, config, username, ... }:
+{ pkgs, config, username, nix-homebrew, ... }:
 let
     # Neovim 0.10.4 lives in this nixpkgs commit
     nvim0104 =
@@ -22,6 +22,24 @@ let
                 system = pkgs.stdenv.hostPlatform.system;
             }).neovim;
 in {
+    imports = [
+        nix-homebrew.darwinModules.nix-homebrew
+    ];
+
+    nix-homebrew = {
+        # Install Homebrew under the default prefix
+        enable = true;
+
+        # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+        enableRosetta = false;
+
+        # User owning the Homebrew prefix
+        user = username;
+
+        # Automatically migrate existing Homebrew installations
+        autoMigrate = true;
+    };
+
     # List packages installed in system profile. To search by name, run:
     # > nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
@@ -106,11 +124,6 @@ in {
         # rocksdb
     ];
 
-    environment.variables = {
-        HOMEBREW_NO_AUTO_UPDATE = "1";
-        HOMEBREW_NO_ENV_HINTS = "1";
-    };
-
     system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
             name = "system-applications";
@@ -162,7 +175,7 @@ in {
 
         onActivation = {
             cleanup = "zap";
-            autoUpdate = true;
+            autoUpdate = false;
             upgrade = true;
         };
     };
