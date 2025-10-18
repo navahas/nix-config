@@ -106,6 +106,11 @@ in {
         # rocksdb
     ];
 
+    environment.variables = {
+        HOMEBREW_NO_AUTO_UPDATE = "1";
+        HOMEBREW_NO_ENV_HINTS = "1";
+    };
+
     system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
             name = "system-applications";
@@ -156,7 +161,7 @@ in {
         ];
 
         onActivation = {
-            cleanup = "uninstall";     # Uninstall all packages not listed (but keep taps)
+            cleanup = "zap";
             autoUpdate = true;
             upgrade = true;
         };
