@@ -1,4 +1,4 @@
-{ pkgs, config, username, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+{ pkgs, config, username, ... }:
 let
     # Neovim 0.10.4 lives in this nixpkgs commit
     nvim0104 =
@@ -22,10 +22,6 @@ let
                 system = pkgs.stdenv.hostPlatform.system;
             }).neovim;
 in {
-    imports = [
-        nix-homebrew.darwinModules.nix-homebrew
-    ];
-
     # List packages installed in system profile. To search by name, run:
     # > nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
@@ -129,18 +125,6 @@ in {
                       done
         '';
 
-    nix-homebrew = {
-        # Install Homebrew under the default prefix
-        enable = true;
-        enableRosetta = false;
-        user = username;
-
-        taps = {
-            "homebrew/homebrew-core"   = homebrew-core;
-            "homebrew/homebrew-cask"   = homebrew-cask;
-        };
-    };
-
     # Homebrew configuration (for GUI apps and packages not in nixpkgs)
     homebrew = {
         enable = true;
@@ -172,7 +156,7 @@ in {
         ];
 
         onActivation = {
-            cleanup = "zap";           # Uninstall all packages not listed
+            cleanup = "uninstall";     # Uninstall all packages not listed (but keep taps)
             autoUpdate = true;
             upgrade = true;
         };
