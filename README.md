@@ -18,12 +18,12 @@
 - [Nix 2.32 Manual](https://nix.dev/manual/nix/2.32/nix-2.32.html)
 
 #### Unofficial
-- [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/)
-https://github.com/ryan4yin/nixos-and-flakes-book
-
-- [MyNixOS](https://mynixos.com/)
-
-- [Lazamar](https://lazamar.co.uk/nix-versions/) for pkg versions
+- [NixOS Wiki](https://nixos.wiki/) - Community-maintained documentation and guides
+- [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/) - Comprehensive guide to NixOS and Flakes
+  - [GitHub Repository](https://github.com/ryan4yin/nixos-and-flakes-book)
+- [MyNixOS](https://mynixos.com/) - Search and explore NixOS options and packages
+- [Lazamar](https://lazamar.co.uk/nix-versions/) - Package version history and rollback tool
+- [NixHub](https://www.nixhub.io/) - Package search with advanced filtering
 
 ## nix-darwin
 
