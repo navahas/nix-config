@@ -23,7 +23,7 @@ in {
         helix
 
         # Shell & CLI Utilities
-        bash
+        # bash           # nonInteractive
         fish
         nushell
         bat              # better cat
