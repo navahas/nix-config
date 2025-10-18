@@ -1,14 +1,26 @@
 { pkgs, config, username, nix-homebrew, homebrew-core, homebrew-cask, ... }:
 let
-  # Neovim 0.10.4 lives in this nixpkgs commit
-  nvim0104 =
-    (import (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/c5dd43934613ae0f8ff37c59f61c507c2e8f980d.tar.gz";
-      sha256 = "1cpw3m45v7s7bm9mi750dkdyjgd2gp2vq0y7vr3j42ifw1i85gxv";
-    }) {
-      # make sure we build for your current platform
-      system = pkgs.stdenv.hostPlatform.system;
-    }).neovim;
+    # Neovim 0.10.4 lives in this nixpkgs commit
+    nvim0104 =
+        (import (builtins.fetchTarball {
+            # To find the hash version: https://lazamar.co.uk/nix-versions/
+            # for Neovim v0.10.4;
+            url = "https://github.com/NixOS/nixpkgs/archive/c5dd43934613ae0f8ff37c59f61c507c2e8f980d.tar.gz";
+
+            # To get hash of the pkg we can either build and copy from mismatch or prefetch as follows:
+            # nix-prefetch-url --unpack https://github.com/NixOS/nixpkgs/archive/<commit>.tar.gz
+            #
+            # Example with Neovim:
+            # nix-prefetch-url \
+            #   --unpack https://github.com/NixOS/nixpkgs/archive/c5dd43934613ae0f8ff37c59f61c507c2e8f980d.tar.gz
+            #
+            # > path is '/nix/store/2d8d681fzrs4gxmzawah9qgpkfhic0xm-c5dd43934613ae0f8ff37c59f61c507c2e8f980d.tar.gz'
+            # > 1cpw3m45v7s7bm9mi750dkdyjgd2gp2vq0y7vr3j42ifw1i85gxv
+            sha256 = "1cpw3m45v7s7bm9mi750dkdyjgd2gp2vq0y7vr3j42ifw1i85gxv";
+        }) {
+                # make sure we build for your current platform
+                system = pkgs.stdenv.hostPlatform.system;
+            }).neovim;
 in {
     imports = [
         nix-homebrew.darwinModules.nix-homebrew
