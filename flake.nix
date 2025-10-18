@@ -12,7 +12,7 @@
 
     outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, ... }:
         let
-            username = "usuario00";
+            username = "navahas";
             system = "aarch64-darwin";
             # hostname = "";
             option = "setup";
