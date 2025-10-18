@@ -23,10 +23,16 @@
 
     outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
         let
-            username = "cnavajas";
+            username = "usuario00";
             system = "aarch64-darwin";
             # hostname = "";
             option = "setup";
+
+            cleanSource = builtins.filterSource
+                (path: type:
+                    let base = baseNameOf path;
+                    in ! (base == ".git" || base == "node_modules" || base == ".direnv"))
+                ./.;
 
             specialArgs =
                 inputs

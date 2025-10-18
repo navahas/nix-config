@@ -129,9 +129,23 @@ in {
                       done
         '';
 
+    nix-homebrew = {
+        # Install Homebrew under the default prefix
+        enable = true;
+        enableRosetta = false;
+        user = username;
+
+        taps = {
+            "homebrew/homebrew-core"   = homebrew-core;
+            "homebrew/homebrew-cask"   = homebrew-cask;
+        };
+    };
+
     # Homebrew configuration (for GUI apps and packages not in nixpkgs)
     homebrew = {
         enable = true;
+
+        taps = [ "nikitabobko/tap" ];
 
         # Casks - GUI Applications
         casks = [
@@ -140,7 +154,7 @@ in {
             # "font-ubuntu-nerd-font"
             "karabiner-elements"
             "keycastr"
-            "kitty"
+            # "kitty"
             "ngrok"
             "obs"
             "orbstack"
@@ -161,18 +175,6 @@ in {
             cleanup = "zap";           # Uninstall all packages not listed
             autoUpdate = true;
             upgrade = true;
-        };
-    };
-
-    nix-homebrew = {
-        # Install Homebrew under the default prefix
-        enable = true;
-        enableRosetta = false;
-        user = username;
-
-        taps = {
-            "homebrew/homebrew-core"   = homebrew-core;
-            "homebrew/homebrew-cask"   = homebrew-cask;
         };
     };
 
