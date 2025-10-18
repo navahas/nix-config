@@ -7,21 +7,9 @@
             url = "github:LnL7/nix-darwin";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-
-        nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-
-        # Optional: Declarative tap management
-        homebrew-core = {
-            url = "github:homebrew/homebrew-core";
-            flake = false;
-        };
-        homebrew-cask = {
-            url = "github:homebrew/homebrew-cask";
-            flake = false;
-        };
     };
 
-    outputs = inputs@{ self, nixpkgs, darwin, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+    outputs = inputs@{ self, nixpkgs, darwin, ... }:
         let
             username = "usuario00";
             system = "aarch64-darwin";
