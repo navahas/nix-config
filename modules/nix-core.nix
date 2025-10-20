@@ -8,6 +8,7 @@
 {
 
   nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     # Determinate uses its own daemon to manage the Nix installation that

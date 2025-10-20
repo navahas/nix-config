@@ -12,9 +12,6 @@
 
   home.file.".config/npm/package.json".text = builtins.toJSON {
     dependencies = {
-      # "@anthropic-ai/claude-code" = "latest";
-      # "@openai/codex" = "latest";
-      # "@google/gemini-cli" = "latest";
       "@typescript/native-preview" = "latest";
     };
   };
@@ -27,5 +24,4 @@
   '';
 
   home.sessionPath = [ "~/.local/npm/bin" ];
-
 }

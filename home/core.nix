@@ -39,28 +39,18 @@
     kind
     minikube
 
-    # Media & Image Tools
     ffmpeg
     imagemagick
 
-    # System Information
     fastfetch
 
-    # Performance & Testing
     hyperfine # benchmarking
     wrk # HTTP benchmarking
     k6 # load testing
 
-    # File & Hex Tools
     hexyl # hex viewer
-
-    # WebAssembly Tools
     wabt # WebAssembly Binary Toolkit
-
-    # IPFS
     kubo # IPFS implementation (formerly go-ipfs)
-
-    # Database Tools
     libpq # PostgreSQL client
   ];
 }

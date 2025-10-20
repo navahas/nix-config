@@ -2,12 +2,24 @@
   description = "Navahas nix-darwin system flake";
 
   inputs = {
+    # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    # home-manager, used for managing user configuration
+    home-manager = {
+      # url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
+      # The `follows` keyword in inputs is used for inheritance.
+      # Here, `inputs.nixpkgs` of home-manager is kept consistent with the `inputs.nixpkgs` of the current flake,
+      # to avoid problems caused by different versions of nixpkgs dependencies.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -15,6 +27,7 @@
       self,
       nixpkgs,
       darwin,
+      home-manager,
       nix-homebrew,
       ...
     }:
@@ -22,7 +35,7 @@
       username = "navahas";
       system = "aarch64-darwin";
       # hostname = "";
-      option = "setup";
+      option = "mini";
 
       specialArgs = inputs // {
         inherit username option;
@@ -35,6 +48,14 @@
           ./modules/nix-core.nix
           ./modules/system.nix
           ./modules/apps.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.${username} = import ./home;
+          }
+
         ];
       };
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;

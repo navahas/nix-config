@@ -26,14 +26,34 @@
       "locked": {
         "lastModified": 1760721282,
         "narHash": "sha256-aAHphQbU9t/b2RRy2Eb8oMv+I08isXv2KUGFAFn7nCo=",
-        "owner": "LnL7",
+        "owner": "nix-darwin",
         "repo": "nix-darwin",
         "rev": "c3211fcd0c56c11ff110d346d4487b18f7365168",
         "type": "github"
       },
       "original": {
-        "owner": "LnL7",
+        "owner": "nix-darwin",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1760929667,
+        "narHash": "sha256-nZh6uvc71nVNaf/y+wesnjwsmJ6IZZUnP2EzpZe48To=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "189c21cf879669008ccf06e78a553f17e88d8ef0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -74,6 +94,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "home-manager": "home-manager",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs"
       }

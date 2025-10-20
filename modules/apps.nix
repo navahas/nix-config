@@ -141,6 +141,9 @@ in
   };
 
   system.activationScripts.postActivation.text = ''
-    echo "#setup -----> darwin flake ready" >&2
+    echo "===========================================" >&2
+    echo "#modules -----> apps configured " >&2
+    echo "#nix-darwin -----> build ready " >&2
+    echo "===========================================" >&2
   '';
 }
