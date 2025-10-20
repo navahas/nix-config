@@ -47,6 +47,12 @@
 - [Nix Installation](https://nixos.org/download/#download-nix)
 - [Nix GitHub Repository](https://github.com/NixOS/nix)
 
+## VM Testing
+- https://wiki.nixos.org/wiki/NixOS_VM_tests
+- https://aorith.github.io/posts/nixos-integration-tests/
+- https://bmcgee.ie/posts/2025/02/nixos-the-power-of-vm-tests/
+- https://nixcademy.com/posts/nixos-integration-tests/
+
 ## Example Configurations
 
 - [Martin Wimpress](https://github.com/wimpysworld/nix-config)
