@@ -35,7 +35,7 @@
       username = "navahas";
       system = "aarch64-darwin";
       # hostname = "";
-      option = "mini";
+      option = "setup";
 
       specialArgs = inputs // {
         inherit username option;

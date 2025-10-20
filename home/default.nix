@@ -1,10 +1,15 @@
-{ username, config, lib, ... }:
+{
+  username,
+  config,
+  lib,
+  ...
+}:
 {
   # import sub modules
   imports = [
-    # ./shell.nix
     ./core.nix
     ./node.nix
+    ./dotfiles.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -23,15 +28,13 @@
     # changes in each release.
     stateVersion = "25.05";
 
+    # --- Note: PATH is currently managed in $HOME/.dotfiles/fish
+    # This includes /etc/profiles/per-user/$USER/bin for home-manager packages
     # Add home-manager user packages to PATH
-    sessionPath = [
-      "/etc/profiles/per-user/${config.home.username}/bin"
-    ];
+    # sessionPath = [
+    #   "/etc/profiles/per-user/${config.home.username}/bin"
+    # ];
   };
-
-  # Dotfiles management - symlink to existing dotfiles
-  home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/.dotfiles/tmux/.tmux.conf";
 
   # Activation script to run after home-manager finishes
   home.activation.postActivation = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
