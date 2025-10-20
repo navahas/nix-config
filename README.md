@@ -9,31 +9,43 @@
 ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 ```
 
-## Nix Resources
+## Configuration Options Documentation
 
-- [Installation](https://nixos.org/download/#download-nix)
-- [Nix GitHub Repository](https://github.com/NixOS/nix)
-- [Nix Tutorials](https://nix.dev/tutorials)
-- [Nix Reference Manual](https://nix.dev/reference/nix-manual.html)
-- [Nix 2.32 Manual](https://nix.dev/manual/nix/2.32/nix-2.32.html)
+### nix-darwin
+- **[nix-darwin Options](https://nix-darwin.github.io/nix-darwin/manual/index.html)**
+- [nix-darwin Repository](https://github.com/nix-darwin/nix-darwin)
 
-#### Unofficial
-- [NixOS Wiki](https://nixos.wiki/) - Community-maintained documentation and guides
+### home-manager
+- **[home-manager Options](https://nix-community.github.io/home-manager/options.xhtml)**
+- [home-manager Repository](https://github.com/nix-community/home-manager)
+
+### Nix Language & Built-ins
+- **[Nix Built-in Functions](https://nix.dev/manual/nix/2.32/language/builtins)** - Reference for all built-in Nix functions
+- **[Nix Language Basics](https://nix.dev/manual/nix/2.32/language/)** - Nix language syntax and semantics
+- [nixpkgs Manual](https://nixos.org/manual/nixpkgs/stable/) - Standard library functions and package sets
+
+### Package Search
+- **[NixHub](https://www.nixhub.io/)** - Advanced package search with filtering
+- [MyNixOS](https://mynixos.com/) - Search packages and options
+- [Lazamar Nix Versions](https://lazamar.co.uk/nix-versions/) - Find specific package versions and commits
+
+---
+
+## Additional Resources
+
+### Learning Nix
+- [Nix Tutorials](https://nix.dev/tutorials) - Official tutorials
 - [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/) - Comprehensive guide to NixOS and Flakes
   - [GitHub Repository](https://github.com/ryan4yin/nixos-and-flakes-book)
-- [MyNixOS](https://mynixos.com/) - Search and explore NixOS options and packages
-- [Lazamar](https://lazamar.co.uk/nix-versions/) - Package version history and rollback tool
-- [NixHub](https://www.nixhub.io/) - Package search with advanced filtering
+- [NixOS Wiki](https://nixos.wiki/) - Community-maintained documentation and guides
 
-## nix-darwin
+### Tools & Utilities
+- [nix-darwin Kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter) - Example nix-darwin configuration
+- [nix-homebrew](https://github.com/zhaofengli/nix-homebrew) - Declarative Homebrew management
 
-- [nix-darwin Repository](https://github.com/nix-darwin/nix-darwin)
-- [nix-darwin Kickstarter](https://github.com/ryan4yin/nix-darwin-kickstarter/tree/main)
-- [nix-homebrew](https://github.com/zhaofengli/nix-homebrew)
-
-## home-manager
-
-- [home-manager Repository](https://github.com/nix-community/home-manager)
+### Installation
+- [Nix Installation](https://nixos.org/download/#download-nix)
+- [Nix GitHub Repository](https://github.com/NixOS/nix)
 
 ## Example Configurations
 

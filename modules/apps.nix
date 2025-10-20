@@ -53,83 +53,21 @@ in
   # List packages installed in system profile. To search by name, run:
   # > nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    # Editors & Terminal Tools
-    nvim0104
-    vim
-    helix
-    ghostty-bin
-    nixd
-    nixfmt-rfc-style
-    nixfmt-tree
+    # System-level Editors & Terminal Tools
+    nvim0104 # system-wide neovim
+    ghostty-bin # terminal emulator
 
-    # Shell & CLI Utilities
-    # bash           # nonInteractive
-    fish
-    nushell
-    bat # better cat
-    eza # better ls
-    fzf # fuzzy finder
-    ripgrep # better grep
-    jq # JSON processor
-    yazi # terminal file manager
-    tmux
-    btop # system monitor
-    htop
-    dust # better du
-    tree
+    # Nix Development Tools (system-level for IDE/LSP support)
+    nixd # nix language server
+    nixfmt-rfc-style # nix formatter
+    nixfmt-tree # nix formatter
 
-    # Development Tools
-    git
-    gh # GitHub CLI
-    lazygit
-    clang-tools
-    cmake
-    rustup
-
-    # Network & Cloud Tools
-    cloudflared
-    gnupg
-    nmap
-    inetutils
-    rsync
-    grpcurl
-
-    # Container & Kubernetes Tools
-    docker-compose
-    kubernetes-helm
-    kind
-    minikube
-    # lazydocker    # might need to check if available
-
-    # Build & Development Libraries
-    coreutils
-    # gnugrep
-    pkgconf
-
-    # Media & Image Tools
-    ffmpeg
-    imagemagick
-
-    # System Information
-    fastfetch
-
-    # Performance & Testing
-    hyperfine # benchmarking
-    wrk # HTTP benchmarking
-    k6 # load testing
-
-    # File & Hex Tools
-    hexyl # hex viewer
-
-    # WebAssembly Tools
-    wabt # WebAssembly Binary Toolkit
-
-    # IPFS
-    kubo # IPFS implementation (formerly go-ipfs)
-
-    # Database Tools
-    libpq # PostgreSQL client
-    # mongosh        # MongoDB shell - may need homebrew if not available
+    # Core System Utilities
+    coreutils # GNU core utilities
+    gnupg # encryption/signing
+    inetutils # network utilities
+    rsync # file synchronization
+    pkgconf # pkg-config replacement
 
     # Development Libraries (consider moving to per-project devShells)
     # boost
