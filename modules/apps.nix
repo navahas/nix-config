@@ -3,6 +3,7 @@
   config,
   username,
   nix-homebrew,
+  neovim-nightly-overlay,
   ...
 }:
 let
@@ -30,6 +31,25 @@ let
         system = pkgs.stdenv.hostPlatform.system;
       }
     ).neovim;
+
+  # Apply neovim-nightly overlay to get access to neovim-nightly package
+  pkgsWithOverlay = import pkgs.path {
+    inherit (pkgs) system;
+    overlays = [ neovim-nightly-overlay.overlays.default ];
+  };
+
+  # Neovim nightly (0.12-dev) from community overlay
+  nvimNightly = pkgsWithOverlay.neovim;
+
+  # Wrapper script: 'nvim' command -> neovim nightly (0.12-dev)
+  nvim-cmd = pkgs.writeShellScriptBin "nvim" ''
+    exec ${nvimNightly}/bin/nvim "$@"
+  '';
+
+  # Wrapper script: 'nvim010' command -> neovim 0.10.4
+  nvim010-cmd = pkgs.writeShellScriptBin "nvim010" ''
+    exec ${nvim0104}/bin/nvim "$@"
+  '';
 in
 {
   imports = [
@@ -54,7 +74,8 @@ in
   # > nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # System-level Editors & Terminal Tools
-    nvim0104 # system-wide neovim
+    nvim-cmd # 'nvim' command -> neovim nightly (0.12-dev)
+    nvim010-cmd # 'nvim010' command -> neovim stable (0.10.4)
     ghostty-bin # terminal emulator
 
     # Nix Development Tools (system-level for IDE/LSP support)
