@@ -33,6 +33,9 @@
     nmap
     grpcurl
 
+    lima
+    qemu_full
+
     # Container & Kubernetes Tools
     docker-compose
     kubernetes-helm
