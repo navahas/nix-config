@@ -33,7 +33,7 @@
     nmap
     grpcurl
 
-    lima
+    # lima
     qemu_full
 
     # Container & Kubernetes Tools

@@ -149,9 +149,10 @@ in
 
     # Brews - CLI tools not available in nixpkgs
     brews = [
-      "lazydocker" # jesseduffield/lazydocker/lazydocker
-      # "mongosh"         # MongoDB shell
-      # "lima"            # Linux virtual machines
+      "lazydocker"
+      # "mongosh"
+      "lima"
+      "lima-additional-guestagents"
     ];
 
     onActivation = {
