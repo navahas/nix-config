@@ -103,7 +103,7 @@ in
       env = pkgs.buildEnv {
         name = "system-applications";
         paths = config.environment.systemPackages;
-        pathsToLink = "/Applications";
+        pathsToLink = [ "/Applications" ];
       };
     in
     pkgs.lib.mkForce ''
@@ -139,6 +139,7 @@ in
       "rectangle"
       "stats"
       # "visual-studio-code"
+      "zed"
       "wireshark-app"
       "obsidian"
       "google-chrome"
@@ -153,6 +154,8 @@ in
       # "mongosh"
       "lima"
       "lima-additional-guestagents"
+      # sudo brew services start socket_vmnet
+      "socket_vmnet"
     ];
 
     onActivation = {

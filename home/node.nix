@@ -12,7 +12,7 @@ in
     # nodePackages.yarn # alternative package manager
     claude-code
     codex
-    gemini-cli
+    # gemini-cli
 
     # not working properly atm
     tsgo
