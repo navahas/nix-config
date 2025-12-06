@@ -7,7 +7,6 @@
 }:
 {
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
   nix = {
@@ -22,7 +21,8 @@
     settings = {
       experimental-features = "nix-command flakes";
       trusted-users = [
-        "@admin"
+        "@admin" # Darwin
+        "@wheel" # Linux
         username
       ];
       substituters = [

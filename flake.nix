@@ -2,27 +2,17 @@
   description = "Navahas nix-darwin system flake";
 
   inputs = {
-    # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-
-    # home-manager, used for managing user configuration
     home-manager = {
-      # url = "github:nix-community/home-manager/release-25.05";
       url = "github:nix-community/home-manager";
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs dependencies.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # neovim nightly overlay for 0.12-dev
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
   };
 
   outputs =
@@ -36,32 +26,85 @@
       ...
     }:
     let
-      username = "navahas";
-      system = "aarch64-darwin";
-      # hostname = "";
-      option = "setup";
-
-      specialArgs = inputs // {
-        inherit username option;
+      # Platform configs
+      darwinConfig = {
+        username = "navahas";
+        system = "aarch64-darwin";
       };
+
+      linuxConfig = {
+        username = "cnavajas";
+        system = "x86_64-linux";
+        hostname = "fedora-workstation";
+      };
+
     in
     {
-      darwinConfigurations."${option}" = darwin.lib.darwinSystem {
-        inherit system specialArgs;
+      # === PHASE A: HOME-MANAGER STANDALONE (Immediate Use on Fedora) ===
+      homeConfigurations."${linuxConfig.username}@fedora" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = linuxConfig.system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          username = linuxConfig.username;
+          isDarwin = false;
+        };
+        modules = [ ./home ];
+      };
+
+      # === DARWIN CONFIGURATION (Updated paths) ===
+      darwinConfigurations."setup" = darwin.lib.darwinSystem {
+        system = darwinConfig.system;
+        specialArgs = inputs // { username = darwinConfig.username; };
         modules = [
           ./modules/nix-core.nix
-          ./modules/system.nix
-          ./modules/apps.nix
+          ./modules/darwin/system.nix
+          ./modules/darwin/apps.nix
           home-manager.darwinModules.home-manager
           {
+            nixpkgs.hostPlatform = darwinConfig.system;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.users.${username} = import ./home;
+            home-manager.extraSpecialArgs = {
+              username = darwinConfig.username;
+              isDarwin = true;
+            };
+            home-manager.users.${darwinConfig.username} = import ./home;
           }
-
         ];
       };
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+
+      # === PHASE B: NIXOS CONFIGURATION (Future Use) ===
+      nixosConfigurations."setup-linux" = nixpkgs.lib.nixosSystem {
+        system = linuxConfig.system;
+        specialArgs = inputs // {
+          username = linuxConfig.username;
+          hostname = linuxConfig.hostname;
+        };
+        modules = [
+          ./modules/nix-core.nix
+          ./modules/linux/configuration.nix
+          ./modules/linux/hyprland.nix
+          ./modules/linux/packages.nix
+          home-manager.nixosModules.home-manager
+          {
+            nixpkgs.hostPlatform = linuxConfig.system;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              username = linuxConfig.username;
+              isDarwin = false;
+            };
+            home-manager.users.${linuxConfig.username} = import ./home;
+          }
+        ];
+      };
+
+      # Formatter for both platforms
+      formatter = {
+        ${darwinConfig.system} = nixpkgs.legacyPackages.${darwinConfig.system}.nixfmt-rfc-style;
+        ${linuxConfig.system} = nixpkgs.legacyPackages.${linuxConfig.system}.nixfmt-rfc-style;
+      };
     };
 }

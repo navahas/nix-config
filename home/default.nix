@@ -2,6 +2,7 @@
   username,
   config,
   lib,
+  isDarwin ? true,
   ...
 }:
 {
@@ -16,7 +17,9 @@
   # paths it should manage.
   home = {
     username = username;
-    homeDirectory = "/Users/${username}";
+    homeDirectory = if isDarwin
+      then "/Users/${username}"
+      else "/home/${username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -40,6 +43,7 @@
   home.activation.postActivation = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
     echo "===========================================" >&2
     echo "#home-manager -----> user environment ready" >&2
+    echo "Platform: ${if isDarwin then "Darwin" else "Linux"}" >&2
     echo "===========================================" >&2
   '';
 

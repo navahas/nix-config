@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, isDarwin ? true, ... }:
 {
   home.packages = with pkgs; [
     # Editors
@@ -33,17 +33,14 @@
     nmap
     grpcurl
 
-    # lima
-    qemu_full
-
     # Container & Kubernetes Tools
-    docker-compose
-    kubernetes-helm
-    kind
-    minikube
+    # docker-compose
+    # kubernetes-helm
+    # kind
+    # minikube
 
-    ffmpeg
-    imagemagick
+    # ffmpeg
+    # imagemagick
 
     fastfetch
 
@@ -55,5 +52,7 @@
     wabt # WebAssembly Binary Toolkit
     kubo # IPFS implementation (formerly go-ipfs)
     libpq # PostgreSQL client
-  ];
+  ]
+  # Darwin-only packages (lima uses QEMU on macOS)
+  ++ (if isDarwin then [ qemu_full ] else []);
 }
