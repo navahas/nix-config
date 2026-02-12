@@ -34,7 +34,7 @@
     grpcurl
 
     # lima
-    qemu_full
+    qemu # qemu_full
 
     # Container & Kubernetes Tools
     docker-compose
