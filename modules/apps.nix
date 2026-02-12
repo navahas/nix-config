@@ -34,7 +34,7 @@ let
 
   # Apply neovim-nightly overlay to get access to neovim-nightly package
   pkgsWithOverlay = import pkgs.path {
-    inherit (pkgs) system;
+    system = pkgs.stdenv.hostPlatform.system;
     overlays = [ neovim-nightly-overlay.overlays.default ];
   };
 
@@ -80,7 +80,7 @@ in
 
     # Nix Development Tools (system-level for IDE/LSP support)
     nixd # nix language server
-    nixfmt-rfc-style # nix formatter
+    nixfmt # nix formatter
     nixfmt-tree # nix formatter
 
     # Core System Utilities
@@ -128,6 +128,8 @@ in
     # Casks - GUI Applications
     casks = [
       "aerospace"
+      "raycast"
+      "brave-browser"
       # "font-jetbrains-mono-nerd-font"
       # "font-ubuntu-nerd-font"
       "karabiner-elements"
@@ -144,18 +146,20 @@ in
       "obsidian"
       "google-chrome"
       "claude"
+      "claude-code"
       "spotify"
       "discord"
     ];
 
     # Brews - CLI tools not available in nixpkgs
     brews = [
+      "gemini-cli"
       "lazydocker"
       # "mongosh"
       "lima"
       "lima-additional-guestagents"
-      # sudo brew services start socket_vmnet
-      "socket_vmnet"
+      "socket_vmnet" # sudo brew services start socket_vmnet
+      "gforth"
     ];
 
     onActivation = {

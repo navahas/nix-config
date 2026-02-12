@@ -37,7 +37,7 @@
     }:
     let
       username = "navahas";
-      system = "aarch64-darwin";
+      localSystem = "aarch64-darwin";
       # hostname = "";
       option = "setup";
 
@@ -47,8 +47,10 @@
     in
     {
       darwinConfigurations."${option}" = darwin.lib.darwinSystem {
-        inherit system specialArgs;
+        inherit specialArgs;
+        system = localSystem;
         modules = [
+          { nix.enable = false; }
           ./modules/nix-core.nix
           ./modules/system.nix
           ./modules/apps.nix
@@ -62,6 +64,6 @@
 
         ];
       };
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+      formatter.${localSystem} = nixpkgs.legacyPackages.${localSystem}.nixfmt-rfc-style;
     };
 }
