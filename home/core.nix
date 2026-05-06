@@ -29,6 +29,7 @@
       gh # GitHub CLI
       lazygit
       clang-tools
+      clang
       cmake
       rustup
 
