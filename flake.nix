@@ -1,5 +1,5 @@
 {
-  description = "Navahas nix-darwin system flake";
+  description = "Navahas multi-platform Nix flake (nix-darwin + home-manager standalone)";
 
   inputs = {
     # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -37,18 +37,24 @@
     }:
     let
       username = "navahas";
-      localSystem = "aarch64-darwin";
-      # hostname = "";
+      darwinSystem = "aarch64-darwin";
+      linuxSystem = "x86_64-linux";
       option = "setup";
+      vpsHost = "vps";
 
       specialArgs = inputs // {
         inherit username option;
+      };
+
+      linuxPkgs = import nixpkgs {
+        system = linuxSystem;
+        config.allowUnfree = true;
       };
     in
     {
       darwinConfigurations."${option}" = darwin.lib.darwinSystem {
         inherit specialArgs;
-        system = localSystem;
+        system = darwinSystem;
         modules = [
           { nix.enable = false; }
           ./modules/nix-core.nix
@@ -64,6 +70,14 @@
 
         ];
       };
-      formatter.${localSystem} = nixpkgs.legacyPackages.${localSystem}.nixfmt-rfc-style;
+
+      homeConfigurations."${username}@${vpsHost}" = home-manager.lib.homeManagerConfiguration {
+        pkgs = linuxPkgs;
+        extraSpecialArgs = specialArgs;
+        modules = [ ./home ];
+      };
+
+      formatter.${darwinSystem} = nixpkgs.legacyPackages.${darwinSystem}.nixfmt-rfc-style;
+      formatter.${linuxSystem} = nixpkgs.legacyPackages.${linuxSystem}.nixfmt-rfc-style;
     };
 }

@@ -1,59 +1,65 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
-  home.packages = with pkgs; [
-    # Editors
-    helix
-    vim
+  home.packages =
+    with pkgs;
+    [
+      # Editors
+      helix
+      vim
 
-    # Shell & CLI Utilities
-    fish
-    nushell
-    bat # better cat
-    eza # better ls
-    fzf # fuzzy finder
-    ripgrep # better grep
-    jq # JSON processor
-    yazi # terminal file manager
-    tmux
-    btop # system monitor
-    htop
-    dust # better du
-    tree
+      # Shell & CLI Utilities
+      fish
+      nushell
+      bat # better cat
+      eza # better ls
+      fzf # fuzzy finder
+      ripgrep # better grep
+      jq # JSON processor
+      yazi # terminal file manager
+      tmux
+      btop # system monitor
+      htop
+      dust # better du
+      tree
 
-    # Development Tools
-    git
-    gh # GitHub CLI
-    lazygit
-    clang-tools
-    cmake
-    rustup
+      # Development Tools
+      git
+      gh # GitHub CLI
+      lazygit
+      clang-tools
+      cmake
+      rustup
 
-    # Network & Cloud Tools
-    cloudflared
-    nmap
-    grpcurl
+      # Network & Cloud Tools
+      cloudflared
 
-    # lima
-    qemu # qemu_full
+      fastfetch
 
-    # Container & Kubernetes Tools
-    docker-compose
-    kubernetes-helm
-    kind
-    minikube
+      hexyl # hex viewer
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      # Darwin-only / heavy packages excluded from VPS profile
+      nmap
+      grpcurl
 
-    ffmpeg
-    imagemagick
+      # lima
+      qemu # qemu_full
 
-    fastfetch
+      # Container & Kubernetes Tools
+      docker-compose
+      kubernetes-helm
+      kind
+      minikube
 
-    hyperfine # benchmarking
-    wrk # HTTP benchmarking
-    k6 # load testing
+      ffmpeg
+      imagemagick
 
-    hexyl # hex viewer
-    wabt # WebAssembly Binary Toolkit
-    kubo # IPFS implementation (formerly go-ipfs)
-    libpq # PostgreSQL client
-  ];
+      hyperfine # benchmarking
+      wrk # HTTP benchmarking
+      k6 # load testing
+
+      wabt # WebAssembly Binary Toolkit
+      kubo # IPFS implementation (formerly go-ipfs)
+      libpq # PostgreSQL client
+    ];
 }

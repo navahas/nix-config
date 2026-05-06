@@ -6,7 +6,7 @@
 # in
 {
   home.packages = with pkgs; [
-    nodejs_25
+    nodejs_22
     # nodePackages.npm # included with nodejs
     # nodePackages.pnpm # alternative package manager
     # nodePackages.yarn # alternative package manager

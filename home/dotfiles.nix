@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Symlink dotfiles from $HOME/.dotfiles expected locations
   # This allows editing configs directly without needing to rebuild
@@ -21,14 +21,14 @@
     ".local/scripts".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts";
 
+    ".config/eza".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/eza";
+  } // lib.optionalAttrs pkgs.stdenv.isDarwin {
     ".config/aerospace".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/aerospace";
 
     ".config/ghostty".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/ghostty";
-
-    ".config/eza".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/eza";
   };
 
   # Note: No programs.*.enable here since configs are managed externally via symlinks
