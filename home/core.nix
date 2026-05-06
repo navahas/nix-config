@@ -6,6 +6,8 @@
       # Editors
       helix
       vim
+      neovim
+      unzip
 
       # Shell & CLI Utilities
       fish

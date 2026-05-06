@@ -40,7 +40,7 @@
       darwinSystem = "aarch64-darwin";
       linuxSystem = "x86_64-linux";
       option = "setup";
-      vpsHost = "vps";
+      vpsHost = "devlab";
 
       specialArgs = inputs // {
         inherit username option;
