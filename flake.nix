@@ -20,9 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # neovim nightly overlay for 0.12-dev
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
   };
 
   outputs =
@@ -32,7 +29,6 @@
       darwin,
       home-manager,
       nix-homebrew,
-      neovim-nightly-overlay,
       ...
     }:
     let

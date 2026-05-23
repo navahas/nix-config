@@ -4,9 +4,9 @@
     with pkgs;
     [
       # Editors
+      neovim
       helix
       vim
-      neovim
       unzip
 
       # Shell & CLI Utilities
