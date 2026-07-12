@@ -32,6 +32,7 @@
       clang
       cmake
       rustup
+      typescript-go
 
       # Network & Cloud Tools
       cloudflared
