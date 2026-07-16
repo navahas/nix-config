@@ -18,6 +18,9 @@
     ".local/scripts".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/scripts";
 
+    ".config/clangd".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/clangd";
+
     ".config/eza".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/eza";
   } // lib.optionalAttrs pkgs.stdenv.isDarwin {
