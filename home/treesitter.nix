@@ -14,10 +14,18 @@ let
     rust       = tree-sitter-rust;
   };
 
+  # Parsers from nvim-treesitter-parsers (different attr scope).
+  extraGrammars = {
+    nasm = pkgs.vimPlugins.nvim-treesitter-parsers.nasm;
+  };
+
   links = lib.concatStringsSep "\n" (
     lib.mapAttrsToList (name: grammar:
       "ln -s ${grammar}/parser $out/parser/${name}.so"
     ) grammars
+    ++ lib.mapAttrsToList (name: grammar:
+      "ln -s ${grammar}/parser/${name}.so $out/parser/${name}.so"
+    ) extraGrammars
   );
 
   treesitter-parsers = pkgs.runCommand "nvim-treesitter-parsers" { } ''
