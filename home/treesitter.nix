@@ -12,6 +12,7 @@ let
     tsx        = tree-sitter-tsx;
     javascript = tree-sitter-javascript;
     rust       = tree-sitter-rust;
+    cpp        = tree-sitter-cpp;
   };
 
   # Parsers from nvim-treesitter-parsers (different attr scope).
