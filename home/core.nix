@@ -28,11 +28,11 @@
       git
       gh # GitHub CLI
       lazygit
-      clang-tools
-      clang
+      llvmPackages_23.clang-tools
+      llvmPackages_23.clang
       cmake
       rustup
-      typescript-go
+      typescript
 
       # Network & Cloud Tools
       cloudflared
@@ -41,12 +41,7 @@
 
       hexyl # hex viewer
     ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      # clang-format 23.1.0 wrapped from the upstream LLVM prebuilt binary.
-      # hiPrio so it wins the `clang-format` collision against clang-tools.
-      (lib.hiPrio (pkgs.callPackage ../pkgs/clang-format-23.nix { }))
-    ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       # Darwin-only / heavy packages excluded from VPS profile
       nmap
       grpcurl
