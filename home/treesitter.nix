@@ -17,7 +17,7 @@ let
 
   # Parsers from nvim-treesitter-parsers (different attr scope).
   extraGrammars = {
-    nasm = pkgs.vimPlugins.nvim-treesitter-parsers.nasm;
+    # nasm = pkgs.vimPlugins.nvim-treesitter-parsers.nasm;
   };
 
   links = lib.concatStringsSep "\n" (
